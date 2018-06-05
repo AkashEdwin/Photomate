@@ -1,24 +1,22 @@
-# README
+# Photomate
+[![Gem Version]
+[![Gem Downloads]
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+An image sharing website.
 
-Things you may want to cover:
+## Requirements
 
-* Ruby version
+Ruby 2.4.4
+Rails 5.1.4
 
-* System dependencies
+##How to use
 
-* Configuration
+open cmd
+>git clon https://github.com/AkashEdwin/Photomate.git
+>cd photomate
+>bundle install
+>rails s
 
-* Database creation
+The server should be running in localhost:3000 in browser.
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Enjoy!
