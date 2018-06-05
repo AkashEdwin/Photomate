@@ -2,11 +2,11 @@
 <div class="row">
   <aside class="col-md-4">
     <section class="user_info">
-      <h1>
+      <h4>
         <% @user=@micropost.user %>
         <%= gravatar_for @user %>
         <%=link_to @user.name, @user %>
-      </h1>
+      </h4>
     </section>
   </aside>
 </div>
@@ -14,5 +14,11 @@
    <h4>
       <%= @micropost.content %>
    </h4>
-   <%= image_tag (@micropost.picture.url if @micropost.picture?) ,:align => "middle" %>
+   <%= image_tag (@micropost.picture.url if @micropost.picture?) ,:size => "500x500" ,:align => "middle" %>
 </div>
+<br>
+<span class="row-4">
+  <aside>
+  <%= render 'comments/comment' %>
+    </aside>
+</span>

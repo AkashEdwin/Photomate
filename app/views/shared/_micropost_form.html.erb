@@ -8,7 +8,9 @@
     <%= f.file_field :picture, accept: 'image/jpeg,image/gif,image/png' %>
   </span>
   <div class="check">
-    <%=f.check_box :privat , message: "Private" %>
+    <%= f.label :lineprob do %>
+    Private<%=f.check_box :privat %>
+    <%end%>
   </div>
 
 <% end %>

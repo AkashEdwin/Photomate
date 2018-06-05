@@ -30,7 +30,9 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :microposts
+  resources :microposts do
+    resources :comments
+  end
 
   resources :microposts do
     member do

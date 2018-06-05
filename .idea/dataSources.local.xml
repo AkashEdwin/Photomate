@@ -15,5 +15,8 @@
       <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" />
       <introspection-schemas>*:</introspection-schemas>
     </data-source>
+    <data-source name="development [5]" uuid="d749fb52-a592-4912-b524-f7b93e7263b6">
+      <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" />
+    </data-source>
   </component>
 </project>

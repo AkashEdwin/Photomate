@@ -1,7 +1,8 @@
 class MicropostsController < ApplicationController
   self.responder = ApplicationResponder
   before_action :logged_in_user, only: [:create, :destroy, :vote ]
-  before_action :correct_user,   only: [:destroy, :vote]
+  before_action :correct_user,   only: [:destroy]
+  before_action :find_post, only: [:vote]
   respond_to :js, :json, :html
 
   def index
@@ -10,6 +11,7 @@ class MicropostsController < ApplicationController
 
   def show
     @micropost= Micropost.find(params[:id])
+    @comments= Comment.where(micropost_id: @micropost).order("created_at DESC")
   end
 
   def create
@@ -41,11 +43,15 @@ class MicropostsController < ApplicationController
   private
 
   def micropost_params
-    params.require(:micropost).permit(:content, :picture,:privat)
+    params.require(:micropost).permit(:content, :picture,:privat,:id)
   end
 
   def correct_user
     @micropost = current_user.microposts.find_by(id: params[:id])
     redirect_to root_url if @micropost.nil?
+  end
+
+  def find_post
+    @micropost = Micropost.find_by(params[:val])
   end
 end

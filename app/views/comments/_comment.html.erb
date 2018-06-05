@@ -1,0 +1,15 @@
+<% @comments.each do |comment| %>
+  <div>
+    <br>
+    <h4><%=link_to comment.user.name,comment.user%>
+    </h4>
+   <%= comment.content %>
+    <br>
+    <% if current_user == comment.user %>
+      <%= link_to "Delete", [comment.micropost, comment],method: :delete%>
+      <%= link_to "Edit", edit_micropost_comment_path(comment.micropost,comment) %>
+    <% end %>
+  </div>
+<% end %>
+
+<%= render 'comments/form' %>

@@ -8,6 +8,7 @@ class ApplicationController < ActionController::Base
   include SessionsHelper
   helper_method :current_user
 
+
   private
 
   # Confirms a logged-in user.
