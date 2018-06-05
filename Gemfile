@@ -18,10 +18,15 @@ gem 'puma', '~> 3.7'
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
-platforms :mswin do
- gem 'wdm', '>= 0.1.0', :group => [:development]
-end
-
+#respond
+gem 'responders'
+# Voting
+gem 'acts_as_votable', '~> 0.11.1'
+gem 'wdm', '>= 0.1.0', :group => [:development]
+#Athentication with Fb,gmail
+gem "omniauth-google-oauth2", "~> 0.2.1"
+gem 'omniauth'
+gem 'omniauth-facebook', '1.4.0'
 gem 'coffee-script-source', '1.8.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby

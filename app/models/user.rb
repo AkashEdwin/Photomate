@@ -1,6 +1,6 @@
 class User < ApplicationRecord
+  acts_as_voter
   has_many :microposts, dependent: :destroy
-  has_many :likes, dependent:  :destroy
   has_many :active_relationships, class_name:  "Relationship",
            foreign_key: "follower_id",
            dependent:   :destroy
@@ -63,6 +63,17 @@ class User < ApplicationRecord
                      WHERE  follower_id = :user_id"
     Micropost.where("user_id IN (#{following_ids})
                      OR user_id = :user_id", user_id: id)
+  end
+
+  def self.from_omniauth(auth)
+    where(provider: auth.provider, uid: auth.uid).first_or_initialize.tap do |user|
+      user.provider = auth.provider
+      user.uid = auth.uid
+      user.name = auth.info.name
+      user.oauth_token = auth.credentials.token
+      user.oauth_expires_at = Time.at(auth.credentials.expires_at)
+      user.save!
+    end
   end
   # Follows a user.
   def follow(other_user)

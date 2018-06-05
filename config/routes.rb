@@ -17,12 +17,10 @@ Rails.application.routes.draw do
   post   '/login',   to: 'sessions#create'
 
   delete '/logout',  to: 'sessions#destroy'
-  resources :users do
-    member do
-      get :following, :followers
-    end
-  end
 
+  get 'auth/google_oauth2/callback', to: 'sessions#create2'
+
+  get 'auth/failure', to: redirect('/')
   resources :users
 
   resources :users do
@@ -32,7 +30,13 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :microposts,          only: [:create, :destroy]
+  resources :microposts
+
+  resources :microposts do
+    member do
+      post 'like' => 'microposts#vote'
+    end
+  end
 
   resources :relationships,       only: [:create, :destroy]
 
