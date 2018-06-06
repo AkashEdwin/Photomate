@@ -9,11 +9,13 @@ class MicropostsController < ApplicationController
     @micropost = Micropost.all
   end
 
+  #Display resources
   def show
     @micropost= Micropost.find(params[:id])
     @comments= Comment.where(micropost_id: @micropost).order("created_at DESC")
   end
 
+  #Post creation
   def create
     @micropost = current_user.microposts.build(micropost_params)
     if @micropost.save
@@ -25,15 +27,22 @@ class MicropostsController < ApplicationController
     end
   end
 
+
   def vote
     if !current_user.liked? @micropost
       @micropost.liked_by current_user
     else
       @micropost.unliked_by current_user
     end
-    redirect_to @micropost.user
+    @value=params[:val]
+    if !@value == params[:val]
+        redirect_to @micropost.user
+    else
+      redirect_to @micropost
+    end
  end
 
+  #Destroying the post
   def destroy
     @micropost.destroy
     flash[:success] = "Micropost deleted"
@@ -43,7 +52,7 @@ class MicropostsController < ApplicationController
   private
 
   def micropost_params
-    params.require(:micropost).permit(:content, :picture,:privat,:id)
+    params.require(:micropost).permit(:content, :picture,:privat)
   end
 
   def correct_user
@@ -52,6 +61,6 @@ class MicropostsController < ApplicationController
   end
 
   def find_post
-    @micropost = Micropost.find_by(params[:val])
+    @micropost = Micropost.find_by(id: params[:val])
   end
 end

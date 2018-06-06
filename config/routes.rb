@@ -18,7 +18,7 @@ Rails.application.routes.draw do
 
   delete '/logout',  to: 'sessions#destroy'
 
-  get 'auth/google_oauth2/callback', to: 'sessions#create2'
+  get 'auth/:provider/callback', to: 'sessions#creater'
 
   get 'auth/failure', to: redirect('/')
   resources :users
@@ -36,7 +36,7 @@ Rails.application.routes.draw do
 
   resources :microposts do
     member do
-      post 'like' => 'microposts#vote'
+      put 'like' => 'microposts#vote'
     end
   end
 

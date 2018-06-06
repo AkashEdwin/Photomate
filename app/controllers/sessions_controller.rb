@@ -1,7 +1,7 @@
 class SessionsController < ApplicationController
   def new
   end
-
+#User session creation
   def create
     user = User.find_by(email: params[:session][:email].downcase)
     if user && user.authenticate(params[:session][:password])
@@ -19,8 +19,12 @@ class SessionsController < ApplicationController
     redirect_to root_url
   end
 
-  def create2
-    user = User.from_omniauth(env["omniauth.auth"])
+  #User session with gmail-not working currently
+  def creater
+    auth = request.env["omniauth.auth"]
+    session[:omniauth]=auth.except('extra')
+    user= User.sign_in_from_omniauth(auth)
+    sessioon[:user_id]=user.id
     log_in user
     redirect_back_or user
   end

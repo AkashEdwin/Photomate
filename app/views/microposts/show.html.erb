@@ -12,6 +12,14 @@
 </div>
 <div class="row2">
    <h4>
+     <% if !current_user.liked? @micropost %>
+       <%= link_to image_tag("up.png",:size =>"20x20"), like_micropost_path(:val => @micropost.id ,:pos => "2"), method: :put %>
+     <% else %>
+       <%= link_to image_tag("down.png",:size =>"20x20"), like_micropost_path(:val => @micropost.id , :pos => "2"), method: :put %>
+     <% end %>
+     <%= @micropost.cached_votes_total%>
+     <br>
+     <br>
       <%= @micropost.content %>
    </h4>
    <%= image_tag (@micropost.picture.url if @micropost.picture?) ,:size => "500x500" ,:align => "middle" %>

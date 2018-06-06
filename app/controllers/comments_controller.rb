@@ -1,7 +1,10 @@
+#Post comment section
 class CommentsController < ApplicationController
   before_action :find_post
   before_action :find_comment ,only: [:destroy,:edit,:update,:commenter]
   before_action :commenter ,only: [:destroy,:edit,:update]
+
+  #creating comment
   def create
     @comment = @micropost.comments.create(params[:comment].permit(:content))
     @comment.user_id = current_user.id
@@ -14,6 +17,7 @@ class CommentsController < ApplicationController
     end
   end
 
+  #destroying comment
   def destroy
     @comment.destroy
     redirect_to micropost_path(@micropost)
@@ -31,6 +35,8 @@ class CommentsController < ApplicationController
   end
 
   private
+
+  #function specific parameter aquire methods
 
   def find_post
     @micropost= Micropost.find(params[:micropost_id])
