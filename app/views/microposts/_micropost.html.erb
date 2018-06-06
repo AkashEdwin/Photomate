@@ -13,6 +13,8 @@
                     data: { confirm: "You sure?" } %>
         <% end %>
       </span>
+      <%= @micropost.cached_votes_total%>liked this
+      <%= render 'comments/form' %>
     </li>
   <% end %>
 <% else %>
@@ -28,8 +30,9 @@
                     data: { confirm: "You sure?" } %>
         <% end %>
       </span>
+    <%= @micropost.cached_votes_total%>liked this
+    <%= render 'comments/form' %>
   </li>
 <% end %>
-<%= @micropost.cached_votes_total%>liked this
-<%= render 'comments/form' %>
+
 
